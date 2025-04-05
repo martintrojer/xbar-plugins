@@ -13,6 +13,13 @@ import subprocess
 
 try:
     stats = subprocess.check_output(["memory_pressure", "-v"]).decode("utf-8")
+    pressure = 0
+    active_pages = 0
+    inactive_pages = 0
+    speculative_pages = 0
+    wired_pages = 0
+    free_pages = 0
+
     for line in stats.splitlines():
         if "System-wide memory free percentage" in line:
             mem_used = line.split()[-1].replace("%", "")
